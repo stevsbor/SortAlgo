@@ -44,3 +44,6 @@ public class sortalgo {
         return array;
     }
 }
+
+//TODO: Quick-Sort/Insertion-Sort/Selection-Sort
+//      Cases?
