@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.lang.Math;
 
+//MARK: Main
 public class sortalgo {
     public static void main(String[] args) {
         System.out.println("Sorting Algorythm benchmark");
@@ -14,7 +15,7 @@ public class sortalgo {
         while(j < runs) {
             int[] initialArray = generateRandomArray(arraySize, max);
             System.out.println("Initial Array: " + Arrays.toString(initialArray));
-            int[] sortedArray = insertionSort(initialArray);
+            int[] sortedArray = bubbleSort(initialArray);
             System.out.println("Sorted Array: " + Arrays.toString(sortedArray));
             System.out.println("-------------------------");
             j++;
@@ -27,8 +28,9 @@ public class sortalgo {
         }
         return initialArray;
     }
-
+//MARK: Bubblesort
     public static int[] bubbleSort(int[] array) {
+        long tsBubble = System.nanoTime();
         int n = array.length;
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -39,9 +41,12 @@ public class sortalgo {
                 }
             }
         }
+        long teBubble = System.nanoTime();
+        long bubbleSortTime = teBubble - tsBubble; 
+        System.out.println("Bubblesort time: " + bubbleSortTime);
         return array;
     }
-
+//MARK: Selectionsort
     public static int[] selectionSort(int[] array) {
         int n = array.length;
         for (int i = 0; i < n - 1; i++) {
@@ -57,7 +62,7 @@ public class sortalgo {
         }
         return array;
     }
-
+//MARK: Insertionsort
     public static int[] insertionSort(int[] array) {
         int n = array.length;
         for (int i = 1; i < n; i++) {
@@ -71,7 +76,7 @@ public class sortalgo {
         }
         return array;
     }
-
+//MARK: Quicksort
     public static int[] quickSort(int[] arr) {
         quickSort(arr, 0, arr.length - 1);
         return arr;
@@ -102,6 +107,20 @@ public class sortalgo {
         arr[high] = temp;
 
         return i + 1;
+    }
+
+    public static long nano(long start, long end) {
+        return end - start;
+    }
+
+    public static double sec(long start, long end) {
+        return nano(start, end) / 1_000_000_000.0;
+    }
+
+    public static void timeOutput (long start, long end, String name) {
+        long duration = nano(start, end);
+        double seconds = sec(start, end);
+        System.out.println(name + ": " + duration + " nanoseconds | " + seconds + " seconds");
     }
 
 }
